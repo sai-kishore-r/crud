@@ -4,9 +4,9 @@ import './App.css'
 import { addTodo, removeTodo, editTodo } from './action/addTodo'
 
 function App () {
-  const state = useSelector(state => ({
-    ...state.todos
-  }))
+  const state = useSelector(state => (
+    state.todos
+  ))
   console.log(state)
   let dispatch = useDispatch()
   const [task, setTask] = useState()

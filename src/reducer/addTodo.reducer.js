@@ -8,9 +8,10 @@ const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_TODO':
       console.log('reducer')
-      //   const hasTodo = state.todos.find(i => i.task === action.payload.task)
-      //   console.log(hasTodo)
-      //   if (!hasTodo && action.payload.task !== '') {
+        const hasTodo = state.todos.find(i => i.task === action.payload)
+        console.log(hasTodo,"action",action.payload)
+        if (!hasTodo && action.payload !== '') {
+        console.log("yes")
       const newTodo = {
         id: Math.ceil(Math.random() * 100),
         task: action.payload
@@ -20,7 +21,7 @@ const todoReducer = (state = initialState, action) => {
         ...state,
         todos: addedTodos
       }
-    //   }
+      }
 
     case 'REMOVE_TODO':
       console.log('reducer')
