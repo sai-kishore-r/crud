@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import './App.css'
 import { addTodo, removeTodo, editTodo } from './action/addTodo'
@@ -14,10 +14,13 @@ function App () {
   const [edit, setEdit] = useState(false)
   const [selectedTodo, setSelectedTodo] = useState()
   const [editID, setEditID] = useState()
+  const inputRef=useRef()
   const handleSubmit = e => {
     e.preventDefault()
     dispatch(addTodo(newTodo))
     console.log(newTodo)
+    document.getElementById('input').value = ''
+
   }
   const DeleteTodo = e => {
     dispatch(removeTodo(e))
@@ -29,6 +32,8 @@ function App () {
     dispatch(editTodo({ editID, porp}))
     setEdit(false)
     console.log(e.target[0].value)
+    document.getElementById('input').value = ''
+    
   }
   
   //
@@ -37,6 +42,8 @@ function App () {
       <h1> TODO LIST</h1>
       <form onSubmit={edit ? updateTodo : handleSubmit}>
         <input
+        id='input'
+        ref={inputRef}
           type='text'
           name='todo'
           value={edit ? selectedTodo : task}
@@ -62,6 +69,7 @@ function App () {
                       setSelectedTodo(todo.task)
                       setEdit(true)
                       setEditID(todo.id)
+                      inputRef.current.focus()
                     }}
                   >
                     {' '}
